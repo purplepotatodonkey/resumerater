@@ -6,7 +6,7 @@ interface State {
     file: File | undefined;
   }
 
-export class Navbar extends React.Component {
+export class Navbar extends React.Component<Props,State> {
 
     constructor(props: Props) {
         super(props);
