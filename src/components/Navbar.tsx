@@ -3,14 +3,19 @@ import logo from './logo.svg';
 import Navbar from './components/Navbar';
 import './App.css';
 
-export class App extends React.Component {
+export class Navbar extends React.Component {
   render(): React.ReactNode {
     return (
       <div className="App">
-        <Navbar />
+        <div>
+            This is the navbar Component
+        </div>
+        <div>
+            This is the navbar Component
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default Navbar;
