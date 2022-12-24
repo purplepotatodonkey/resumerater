@@ -10,6 +10,7 @@ const fs = require('fs');
 // });
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
+    console.log('someone hitting upload route')
     fs.writeFile(req.file.path, req.file.buffer, err => {
       if (err) {
         // Handle the error

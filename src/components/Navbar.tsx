@@ -6,7 +6,7 @@ export class App extends React.Component {
     return (
       <div className="App">
         <div>NAVBAR COMPONENT 😄</div>
-        <form action="/upload" method="post" encType="multipart/form-data">
+        <form action="http://139.177.207.245:5000/upload" method="post" encType="multipart/form-data">
           <input type="file" name="pdf" accept="application/pdf"></input>
           <button type="submit">Upload PDF</button>
         </form>
