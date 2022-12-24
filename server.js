@@ -3,7 +3,7 @@ const app = express();
 const port = 5000
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
-const fs = requre('fs');
+const fs = require('fs');
 
 // app.get('/', (req, res) => {
 //   res.send('Hello, World!');
