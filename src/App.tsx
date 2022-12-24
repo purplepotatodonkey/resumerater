@@ -8,6 +8,7 @@ export class App extends React.Component {
     return (
       <div className="App">
         <Navbar />
+        <Navbar />
       </div>
     );
   }
