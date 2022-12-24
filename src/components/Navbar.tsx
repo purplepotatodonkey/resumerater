@@ -1,58 +1,88 @@
-import React, {useState} from 'react';
-import logo from '../logo.svg';
-import '../App.css';
+import * as React from 'react';
+// import { button } from 'react'
 
-interface State {
-    file: File | undefined;
-  }
+const AcceptedFileType = {
+  Text: '.txt',
+  Gif: '.gif',
+  Jpeg: '.jpg',
+  Png: '.png',
+  Doc: '.doc',
+  Pdf: '.pdf',
+  AllImages: 'image/*',
+  AllVideos: 'video/*',
+  AllAudios: 'audio/*',
+};
 
-export class Navbar extends React.Component<Props,State> {
+export default function Upload({ fileType }) {
+  const fileRef = React.useRef();
+  const acceptedFormats =
+    typeof fileType === 'string'
+      ? fileType
+      : Array.isArray(fileType)
+      ? fileType?.join(',')
+      : AcceptedFileType.Text;
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-          file: undefined,
-        };
-      }
+  const [selectedFiles, setSelectedFiles] = React.useState();
 
-    async uploadPdf() {
-        const formData = new FormData();
-        formData.append("file", this.state.file);
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-        // Process the response from the server
-      }
+  const handleFileSelect = (event) => {
+    setSelectedFiles(event?.target?.files?.[0]);
+  };
 
-    handlePdfChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files[0];
-        // Store the file in a state variable or pass it to a prop
-        this.setState({ file });
-      }
+  const onUpload = () => {
+    console.log(selectedFiles);
+  };
 
-      renderPdfPreview() {
-        if (this.state.file) {
-          const fileReader = new FileReader();
-          fileReader.onloadend = (event) => {
-            const fileDataUrl = event.target?.result;
-            if (fileDataUrl) {
-              return <iframe src={fileDataUrl} />;
-            }
-          };
-          fileReader.readAsDataURL(this.state.file);
-        }
-      }
+  const onClear = () => {
+    setSelectedFiles(undefined);
+  };
 
-    render(): React.ReactNode {
-        return (
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={(event) => this.handlePdfChange(event)}
-          />
-        );
-      }
+  const onUpdate = (event) => {
+    if (event.target.textContent.trim().toLowerCase() === 'change') {
+      onClear();
+      fileRef.current.click();
+      return;
+    }
+    if (event.target.textContent.trim().toLowerCase() === 'clear') {
+      onClear();
+      return;
+    }
+  };
+
+  return (
+    <>
+      <input
+        ref={fileRef}
+        hidden
+        type="file"
+        accept={acceptedFormats}
+        onChange={handleFileSelect}
+      />
+      {!selectedFiles?.name && (
+        <button
+          style={{ textTransform: 'none' }}
+          onClick={() => fileRef.current?.click()}
+        >
+          Choose file to upload
+        </button>
+      )}
+      {selectedFiles?.name && (
+        <button
+          style={{ textTransform: 'none' }}
+          onClick={onUpdate}
+        >
+          <span style={{ float: 'left' }}> {selectedFiles?.name}</span>
+          <span style={{ padding: '10px' }}> Change</span>
+          <span>Clear</span>
+        </button>
+      )}
+      <button
+        color="primary"
+        disabled={!selectedFiles}
+        style={{ textTransform: 'none' }}
+        onClick={onUpload}
+      >
+        Upload
+      </button>
+    </>
+  );
 }
-
-export default Navbar;
