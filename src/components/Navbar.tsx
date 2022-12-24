@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import logo from '../logo.svg';
 import '../App.css';
-import Display from './components/Display';
-import './App.css';
 
 interface State {
     file: File | undefined;
