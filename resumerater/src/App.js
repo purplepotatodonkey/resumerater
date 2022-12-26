@@ -65,7 +65,8 @@ function App() {
       console.log("done")
 
 
-      // setPdfstr1(data);
+
+      setPdfstr1("http://139.177.207.245:5000/uploads/" + data);
   }
 
   const handleFileChangeData = (data) => {
@@ -100,7 +101,7 @@ function App() {
       <div style={{position:"fixed",height:"100%",left:"5%",display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
         {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}
         {(pageNumber1>1)&&<button onClick={(e) => setPageNumber1(pageNumber1-1)}>-</button>}
-        <Document file={pdf1} onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file={pdfstr1} onLoadSuccess={onDocumentLoadSuccess}>
           <Page  style={{}} pageNumber={pageNumber1}/>
         </Document>
         <p>
@@ -110,7 +111,7 @@ function App() {
       <div style={{position:"fixed",height:"100%",right:"5%", display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
         {(pageNumber2<numPages2)&&<button onClick={(e) => setPageNumber2(pageNumber2+1)}>+</button>}
         {(pageNumber2>1)&&<button onClick={(e) => setPageNumber2(pageNumber2-1)}>-</button>}
-        <Document file={pdf2} onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file={pdfstr2} onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber2}/>
         </Document>
         <p>
