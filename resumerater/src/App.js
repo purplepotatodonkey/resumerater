@@ -37,35 +37,11 @@ function App() {
       console.log("Fetching a random pdf from server...")
       const response = await fetch('http://139.177.207.245:5000/random', {
         method: 'GET'
-        // mode: 'no-cors',
-        // headers: { 'Content-Type': 'application/json' },
-        // responseType: 'arraybuffer',
       })
-
-      // .then(response => response.blob())
-      // .then(blob => blob.arrayBuffer())
-      // .then(arrayBuffer => {
-      //   const blob = new Blob([arrayBuffer])
-      //   const srcBlob = URL.createObjectURL(blob);
-
-      //   setPdf1(state => ({
-      //     ...state,
-      //     srcBlob
-      //   }));
-      //   console.log(pdf1)
-
-      // console.log("request made")
-      // let data = await response.arrayBuffer();
-      // console.log(data)
-      // console.log("setting response")
-      // handleFileChangeData(data);
       console.log("start")
       const data = await response.text();
       console.log(data)
       console.log("done")
-
-
-
       setPdfstr1("http://139.177.207.245:5000/uploads/" + data);
       console.log("set pdfstr1 to " + pdfstr1)
   }
