@@ -22,7 +22,7 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
       if (err) {
         // Handle the error
       } else {
-        res.send('PDF uploaded successfully');
+        res.redirect('http://139.177.207.245:3000/');
       }
     });
   });

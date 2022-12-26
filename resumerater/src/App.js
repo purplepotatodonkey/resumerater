@@ -23,9 +23,8 @@ function App() {
 
   const getRandomPDF = async(e) => {
       console.log("Fetching a random pdf from server...")
-      let response = await fetch('139.177.207.245:5000/random', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+      let response = await fetch('http://139.177.207.245:5000/random', {
+        method: 'GET'
       });
       let data = await response.json();
       console.log("setting response")
@@ -42,9 +41,13 @@ function App() {
   return (
     <div className="App">
       <div>Test</div>
-      <input type="file" onChange={handleFileChange} />
+      {/* <input type="file" /> */}
+      <form action="http://139.177.207.245:5000/upload" method="post" encType="multipart/form-data">
+        <input type="file" onChange={handleFileChange} name="pdf" accept="application/pdf"></input>
+        <button type="submit">Upload PDF</button>
+      </form>
       <br></br>
-      <button onClick={(e)=>getRandomPDF(e)}>Get 2 Random PDFs From Database</button>
+      <button onClick={(e)=>getRandomPDF}>Get 2 Random PDFs From Database</button>
       <br></br>
       <br></br>
       <div style={{position:"fixed",height:"100%",left:"5%",display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
