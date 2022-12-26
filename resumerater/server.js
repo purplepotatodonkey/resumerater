@@ -6,6 +6,10 @@ const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
 app.use(express.static('uploads'));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 // app.get('/', (req, res) => {
 //   res.send('Hello, World!');
