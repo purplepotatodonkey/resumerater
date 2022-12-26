@@ -67,6 +67,7 @@ function App() {
 
 
       setPdfstr1("http://139.177.207.245:5000/uploads/" + data);
+      console.log("set pdfstr1 to " + pdfstr1)
   }
 
   const handleFileChangeData = (data) => {
@@ -102,7 +103,7 @@ function App() {
         {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}
         {(pageNumber1>1)&&<button onClick={(e) => setPageNumber1(pageNumber1-1)}>-</button>}
         <Document file={pdfstr1} onLoadSuccess={onDocumentLoadSuccess}>
-          <Page  style={{}} pageNumber={pageNumber1}/>
+          <Page pageNumber={pageNumber1}/>
         </Document>
         <p>
           Page {pageNumber1} of {numPages1}
