@@ -20,11 +20,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/random', (req,res) => {
+app.get('/random', async(req,res) => {
   console.log("Fetching Random PDF");
   let cmd = "find /root/resumerater/uploads/* -name '*' | shuf -n 1"
     let output = "";
-    exec(cmd, (err, stdout, stderr) => {
+    await exec(cmd, (err, stdout, stderr) => {
                   if (err !== null) {
                           console.log('exec error: ' + err);
                   }
