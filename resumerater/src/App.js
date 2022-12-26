@@ -55,7 +55,7 @@ function App() {
       // console.log(data)
       // console.log("setting response")
       // handleFileChangeData(data);
-      let data = await response.text();
+      let data = await response.data();
 
 
       setPdfstr1(data);
