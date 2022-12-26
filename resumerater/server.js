@@ -25,17 +25,13 @@ app.get('/random', (req,res) => {
   let cmd = "find /root/resumerater/uploads/* -name '*' | shuf -n 1"
     let output = "";
     exec(cmd, (err, stdout, stderr) => {
-          // setTimeout(function(){
-                  // console.log('stdout: ' + stdout);
-                  // console.log('stderr: ' + stderr);
                   if (err !== null) {
                           console.log('exec error: ' + err);
                   }
-                  console.log("FINISHED:")
                   console.log(stdout)
                   output = stdout.substring(26,stdout.length);
                   console.log(output)
-                  // res.json(JSON.parse(output));
+                  console.log("FINISHED:")
     });
   console.log(output)
   res.send(output);
