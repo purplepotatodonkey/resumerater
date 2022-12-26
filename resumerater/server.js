@@ -33,7 +33,7 @@ app.get('/random', (req,res) => {
                   }
                   console.log("FINISHED:")
                   console.log(stdout)
-                  output = stdout.substring(25,stdout.length);
+                  output = stdout.substring(26,stdout.length);
                   console.log(output)
                   // res.json(JSON.parse(output));
     });
