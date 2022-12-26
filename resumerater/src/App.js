@@ -60,10 +60,10 @@ function App() {
       // console.log("setting response")
       // handleFileChangeData(data);
       const data = await response.json();
-      console.log(data)
+      console.log(data.code)
 
 
-      setPdfstr1(data);
+      // setPdfstr1(data);
   }
 
   const handleFileChangeData = (data) => {
