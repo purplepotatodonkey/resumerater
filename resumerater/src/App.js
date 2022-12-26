@@ -12,7 +12,8 @@ function App() {
   const [pageNumber, setPageNumber] = useState(1);
 
   function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(1);
+    setNumPages(numPages);
+    setPageNumber(1);
   }
 
   const handleFileChange = (e) => {
@@ -49,6 +50,8 @@ function App() {
       <p>
         Page {pageNumber} of {numPages}
       </p>
+      <button onClick={(e) => setPageNumber(pageNumber+1)}>+</button>
+      <button onClick={(e) => setPageNumber(pageNumber-1)}>-</button>
     </div>
   );
 }
