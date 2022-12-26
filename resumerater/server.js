@@ -8,10 +8,11 @@ const fs = require('fs');
 app.use('/uploads/',express.static('/root/resumerater/uploads/'));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Methods', 'GET');
+  // res.header("Access-Control-Allow-Headers", "X-Requested-With");
   // res.header('Access-Control-Allow-Origin', req.get('Origin') || '*');
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Authorization, Range, Content-Type, Accept");
-  res.setHeader('Content-Type', 'application/pdf');
+  // res.setHeader('Content-Type', 'application/pdf');
   // res.header('Access-Control-Allow-Credentials', 'true');
   // res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   // res.header('Access-Control-Expose-Headers', 'Content-Length');
