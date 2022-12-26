@@ -47,7 +47,7 @@ function App() {
         <button type="submit">Upload PDF</button>
       </form>
       <br></br>
-      <button onClick={(e)=>getRandomPDF}>Get 2 Random PDFs From Database</button>
+      <button onClick={getRandomPDF}>Get 2 Random PDFs From Database</button>
       <br></br>
       <br></br>
       <div style={{position:"fixed",height:"100%",left:"5%",display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
