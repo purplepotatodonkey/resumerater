@@ -28,24 +28,24 @@ function App() {
     setPageNumber2(1);
   }
 
-  const onChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+  // const onChange = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    // send the file to the server
-    const formData = new FormData();
-    formData.append('file', file);
-    fetch('http://139.177.207.245:5000/upload', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-    });
-  };
+  // const onSubmit = (event) => {
+  //   event.preventDefault();
+  //   // send the file to the server
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   fetch('http://139.177.207.245:5000/upload', {
+  //     method: 'POST',
+  //     body: formData
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log(data);
+  //   });
+  // };
 
   const getRandomPDF = async(e) => {
       console.log("Fetching 2 random pdfs from server...")
@@ -85,16 +85,16 @@ function App() {
       <div>Test</div>
       {/* <input type="file" /> */}
 
-      {/* <form action="http://139.177.207.245:5000/upload" method="post" encType="multipart/form-data"> */}
-        {/* <input type="file" onChange={handleFileChange} name="pdf" accept="application/pdf"></input> */}
-        {/* <button type="submit">Upload PDF</button> */}
-      {/* </form> */}
+      <form action="http://139.177.207.245:5000/upload" method="post" encType="multipart/form-data">
+        <input type="file" onChange={handleFileChange} name="pdf" accept="application/pdf"></input>
+        <button type="submit">Upload PDF</button>
+      </form>
 
-    <form onSubmit={onSubmit}>
-      <label htmlFor="file">Choose a file:</label>
-      <input type="file" id="file" onChange={onChange} />
-      <button type="submit">Upload</button>
-    </form>
+    {/* <form onSubmit={onSubmit}> */}
+      {/* <label htmlFor="file">Choose a file:</label> */}
+      {/* <input type="file" id="file" onChange={onChange} /> */}
+      {/* <button type="submit">Upload</button> */}
+    {/* </form> */}
 
       <br></br>
       <button onClick={getRandomPDF}>Get 2 Random PDFs From Database</button>
