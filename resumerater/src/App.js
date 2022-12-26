@@ -34,16 +34,19 @@ function App() {
   }
 
   const getRandomPDF = async(e) => {
-      console.log("Fetching a random pdf from server...")
+      console.log("Fetching 2 random pdfs from server...")
       const response = await fetch('http://139.177.207.245:5000/random', {
         method: 'GET'
       })
-      console.log("start")
       const data = await response.text();
       console.log(data)
-      console.log("done")
+      const response2 = await fetch('http://139.177.207.245:5000/random', {
+        method: 'GET'
+      })
+      const data2 = await response2.text();
+      console.log(data2)
       setPdfstr1("http://139.177.207.245:5000/uploads/" + data);
-      console.log("set pdfstr1 to " + pdfstr1)
+      setPdfstr2("http://139.177.207.245:5000/uploads/" + data2);
   }
 
   const handleFileChangeData = (data) => {

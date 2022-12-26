@@ -7,44 +7,17 @@ const fs = require('fs');
 
 app.use('/uploads/',express.static('/root/resumerater/uploads/'));
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  // res.header('mode', 'no-cors');
+  res.header('Access-Control-Allow-Origin', req.get('Origin') || '*');
+  // res.header('Access-Control-Allow-Origin', '*');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Authorization, Range, Content-Type, Accept");
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Expose-Headers', 'Content-Length');
   next();
 });
 
-// app.get('/', (req, res) => {
-//   res.send('Hello, World!');
-// });
-
-// app.get('/uploads/:id', (req,res) => {
-  // console.log("Fetching Upload Page");
-  // res.sendFile('/root/resumerater/uploads');
-//
-  // fileData = fs.readFileSync('/root/resumerater/uploads/'+req.params.id);
-  // console.log("file data is:")
-  // console.log(fileData)
-//
-    // var buf = Buffer.from(fileData, 'base64');
-//
-  //  res.writeHead(200, {
-    //  'Content-Type': 'application/json',
-    //  'Content-Length': buf.length
-  //  });
-  //  res.end(buf);
-//
-//
-// });
-
 app.get('/random', (req,res) => {
   console.log("Fetching Random PDF");
-  // res.sendFile('/root/resumerater/uploads/b42e0deb847222f8638ff429ab2b6b23');
-
-  // var data =fs.readFileSync('/root/resumerater/uploads/b42e0deb847222f8638ff429ab2b6b23');
-  // console.log(data);
-  // res.contentType("application/pdf");
-  // res.send(data);
-
   console.log("sending b42...");
   const rets = "b42e0deb847222f8638ff429ab2b6b23";
   console.log(rets)
