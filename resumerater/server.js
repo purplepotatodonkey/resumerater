@@ -33,7 +33,7 @@ app.get('/random', (req,res) => {
                   console.log(output)
                   console.log("FINISHED:")
     });
-  console.log("final res send output is: " output)
+  console.log("final res send output is: " + output)
   res.send(output);
 });
 
