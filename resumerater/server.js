@@ -6,7 +6,7 @@ const upload = multer({ dest: 'uploads/' });
 const exec = require('child_process').exec;
 const fs = require('fs');
 
-app.use('/uploads/',express.static('/root/resumerater/uploads/'));
+app.use('/uploads/',express.static('/root/resumerater/resumerater/uploads/'));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET');
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 app.get('/random', (req,res) => {
   console.log("Fetching Random PDF");
-  let cmd = "find /root/resumerater/uploads/* -name '*' | shuf -n 1"
+  let cmd = "find /root/resumerater/resumerater/uploads/* -name '*' | shuf -n 1"
     let output = "";
     exec(cmd, (err, stdout, stderr) => {
       if (err !== null) {
