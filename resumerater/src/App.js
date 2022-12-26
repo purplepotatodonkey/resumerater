@@ -22,7 +22,7 @@ function App() {
   }
 
   const getRandomPDF = async(e) => {
-      let response = await fetch('139.177.207.245:5000/random2', {
+      let response = await fetch('139.177.207.245:5000/random', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       });
