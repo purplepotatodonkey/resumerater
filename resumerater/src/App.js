@@ -18,12 +18,6 @@ function App() {
 
   useEffect(() => {
     console.log(`pdfstr1 is ${pdfstr1} and pdfstr2 is ${pdfstr2}`)
-    if (pdfstr1) {
-      console.log(`pdfstr1 not null`)
-    } else {
-      console.log(`pdfstr1 is null`)
-    }
-    console.log("One of the pdfs changed!")
   }, pdfstr1,pdfstr2)
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -76,7 +70,6 @@ function App() {
       </form>
       <br></br>
       <button onClick={getRandomPDF}>Get 2 Random PDFs From Database</button>
-      <br></br>
       <br></br>
       <div style={{position:"fixed",height:"100%",left:"5%",display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
         {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}

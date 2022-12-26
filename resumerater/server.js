@@ -3,6 +3,7 @@ const app = express();
 const port = 5000
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
+const exec = require('child_process').exec;
 const fs = require('fs');
 
 app.use('/uploads/',express.static('/root/resumerater/uploads/'));
@@ -21,10 +22,22 @@ app.use((req, res, next) => {
 
 app.get('/random', (req,res) => {
   console.log("Fetching Random PDF");
-  console.log("sending b42...");
-  const rets = "b42e0deb847222f8638ff429ab2b6b23";
-  console.log(rets)
-  res.send(rets);
+  let cmd = "find /root/resumerater/uploads/* -name '*' | shuf -n 1"
+    let output = "";
+    exec(cmd, (err, stdout, stderr) => {
+          // setTimeout(function(){
+                  // console.log('stdout: ' + stdout);
+                  // console.log('stderr: ' + stderr);
+                  if (err !== null) {
+                          console.log('exec error: ' + err);
+                  }
+                  console.log("FINISHED:")
+                  console.log(stdout)
+                  output = stdout;
+                  // res.json(JSON.parse(output));
+    });
+  console.log(output)
+  res.send(output);
 });
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
