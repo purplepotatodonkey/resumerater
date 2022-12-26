@@ -59,7 +59,7 @@ function App() {
       // console.log(data)
       // console.log("setting response")
       // handleFileChangeData(data);
-      const data = await response.text();
+      const data = await response.arrayBuffer();
       console.log(data)
 
 
