@@ -21,7 +21,11 @@ app.get('/uploads/:id', (req,res) => {
   console.log("Fetching Upload Page");
   res.sendFile('/root/resumerater/uploads');
 
-    var buf = Buffer.from(fs.readFileSync('/root/resumerater/uploads/'+req.params.id), 'base64');
+  fileData = fs.readFileSync('/root/resumerater/uploads/'+req.params.id);
+  console.log("file data is:")
+  console.log(fileData)
+
+    var buf = Buffer.from(fileData, 'base64');
 
    res.writeHead(200, {
      'Content-Type': 'application/json',
