@@ -27,7 +27,7 @@ app.get('/uploads/:id', (req,res) => {
      'Content-Type': 'application/json',
      'Content-Length': buf.length
    });
-   res.end(img);
+   res.end(buf);
 
 
 });
