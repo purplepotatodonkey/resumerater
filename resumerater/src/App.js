@@ -30,10 +30,11 @@ function App() {
         responseType: 'arraybuffer',
       });
       console.log("request made")
-      let data = await response.data;
+      let data = await response.arrayBuffer();
       console.log(data)
       console.log("setting response")
-      setPdf1(data);
+      handleFileChange(data);
+      // setPdf1(data);
   }
 
   const handleFileChange = (e) => {
