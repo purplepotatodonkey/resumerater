@@ -5,7 +5,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
-// app.use('/uploads/',express.static('/root/resumerater/uploads/'));
+app.use('/uploads/',express.static('/root/resumerater/uploads/'));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -17,24 +17,24 @@ app.use((req, res, next) => {
 //   res.send('Hello, World!');
 // });
 
-app.get('/uploads/:id', (req,res) => {
-  console.log("Fetching Upload Page");
-  res.sendFile('/root/resumerater/uploads');
-
-  fileData = fs.readFileSync('/root/resumerater/uploads/'+req.params.id);
-  console.log("file data is:")
-  console.log(fileData)
-
-    var buf = Buffer.from(fileData, 'base64');
-
-   res.writeHead(200, {
-     'Content-Type': 'application/json',
-     'Content-Length': buf.length
-   });
-   res.end(buf);
-
-
-});
+// app.get('/uploads/:id', (req,res) => {
+  // console.log("Fetching Upload Page");
+  // res.sendFile('/root/resumerater/uploads');
+//
+  // fileData = fs.readFileSync('/root/resumerater/uploads/'+req.params.id);
+  // console.log("file data is:")
+  // console.log(fileData)
+//
+    // var buf = Buffer.from(fileData, 'base64');
+//
+  //  res.writeHead(200, {
+    //  'Content-Type': 'application/json',
+    //  'Content-Length': buf.length
+  //  });
+  //  res.end(buf);
+//
+//
+// });
 
 app.get('/random', (req,res) => {
   console.log("Fetching Random PDF");
