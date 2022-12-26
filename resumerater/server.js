@@ -6,7 +6,7 @@ const upload = multer({ dest: 'uploads/' });
 const exec = require('child_process').exec;
 const fs = require('fs');
 
-app.use('/uploads/',express.static('/root/resumerater/resumerater/uploads/'));
+app.use('/uploads/',express.static('/root/resumerater/resumerater/'));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET');
