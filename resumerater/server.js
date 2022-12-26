@@ -25,15 +25,15 @@ app.get('/random', (req,res) => {
   let cmd = "find /root/resumerater/uploads/* -name '*' | shuf -n 1"
     let output = "";
     exec(cmd, (err, stdout, stderr) => {
-                  if (err !== null) {
-                          console.log('exec error: ' + err);
-                  }
-                  console.log(stdout)
-                  output = stdout.substring(26,stdout.length);
-                  console.log(output)
-                  console.log("FINISHED:")
-                  console.log("final res send output is: " + output)
-                  res.send(output);
+      if (err !== null) {
+        console.log('exec error: ' + err);
+      }
+      console.log(stdout)
+      output = stdout.substring(26,stdout.length);
+      console.log(output)
+      console.log("FINISHED:")
+      console.log("final res send output is: " + output)
+      res.send(output);
     });
 });
 
