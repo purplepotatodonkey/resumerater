@@ -33,17 +33,24 @@ function App() {
       let data = await response.arrayBuffer();
       console.log(data)
       console.log("setting response")
-      handleFileChange(data);
+      handleFileChangeData(data);
       // setPdf1(data);
+  }
+
+  const handleFileChangeData = (data) => {
+    if (data) {
+      console.log("Handling new data")
+      setPdf1(e.target.files[0]);
+      setPdf2(e.target.files[0]);
+    } else {
+      console.log("No data")
+    }
   }
 
   const handleFileChange = (e) => {
     if (e.target.files) {
       setPdf1(e.target.files[0]);
       setPdf2(e.target.files[0]);
-    } else {
-      setPdf1(e);
-      setPdf2(e);
     }
   }
 
