@@ -41,6 +41,9 @@ function App() {
     if (e.target.files) {
       setPdf1(e.target.files[0]);
       setPdf2(e.target.files[0]);
+    } else {
+      setPdf1(e);
+      setPdf2(e);
     }
   }
 
