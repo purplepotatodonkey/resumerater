@@ -29,8 +29,9 @@ function App() {
       });
       console.log("request made")
       let data = await response.json();
+      console.log(data)
       console.log("setting response")
-      setPdf1(data[0]);
+      // setPdf1(data[0]);
   }
 
   const handleFileChange = (e) => {
