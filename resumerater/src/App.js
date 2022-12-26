@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {Document, Page, pdfjs } from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -9,10 +9,18 @@ function App() {
 
   const [pdf1, setPdf1] = useState(null);
   const [pdf2, setPdf2] = useState(null);
+  const [pdfstr1, setPdfstr1] = useState(null);
+  const [pdfstr2, setPdfstr2] = useState(null);
   const [numPages1, setNumPages1] = useState(null);
   const [numPages2, setNumPages2] = useState(null);
   const [pageNumber1, setPageNumber1] = useState(1);
   const [pageNumber2, setPageNumber2] = useState(1);
+
+  useEffect(() => {
+    console.log(`pdfstr1 is ${pdfstr1} and pdfstr2 is ${pdfstr2}`)
+
+    console.log("One of the pdfs changed!")
+  }, pdfstr1,pdfstr2)
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages1(numPages);
@@ -28,13 +36,29 @@ function App() {
         mode: 'no-cors',
         // contentType: 'application/pdf',
         responseType: 'arraybuffer',
-      });
-      console.log("request made")
-      let data = await response.arrayBuffer();
-      console.log(data)
-      console.log("setting response")
-      handleFileChangeData(data);
-      // setPdf1(data);
+      })
+
+      // .then(response => response.blob())
+      // .then(blob => blob.arrayBuffer())
+      // .then(arrayBuffer => {
+      //   const blob = new Blob([arrayBuffer])
+      //   const srcBlob = URL.createObjectURL(blob);
+
+      //   setPdf1(state => ({
+      //     ...state,
+      //     srcBlob
+      //   }));
+      //   console.log(pdf1)
+
+      // console.log("request made")
+      // let data = await response.arrayBuffer();
+      // console.log(data)
+      // console.log("setting response")
+      // handleFileChangeData(data);
+      let data = await response.text();
+
+
+      setPdfstr1(data);
   }
 
   const handleFileChangeData = (data) => {
