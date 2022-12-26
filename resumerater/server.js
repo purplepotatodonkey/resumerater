@@ -22,6 +22,7 @@ app.get('/random', (req,res) => {
 
   console.log("sending b42...");
   const rets = "b42e0deb847222f8638ff429ab2b6b23";
+  console.log(rets)
   res.send(rets);
 });
 
