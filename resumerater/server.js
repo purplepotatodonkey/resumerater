@@ -21,7 +21,8 @@ app.get('/random', (req,res) => {
   // res.send(data);
 
   console.log("sending b42...");
-  res.send("b42e0deb847222f8638ff429ab2b6b23");
+  const rets = "b42e0deb847222f8638ff429ab2b6b23";
+  res.send(rets);
 });
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
