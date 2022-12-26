@@ -6,7 +6,7 @@ const upload = multer({ dest: 'uploads/' });
 const exec = require('child_process').exec;
 const fs = require('fs');
 
-app.use('/uploads/',express.static('/root/resumerater/uploads/'));
+app.use('/uploads/',express.static('/root/resumerater/resumerater/uploads/'));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET');
@@ -39,13 +39,13 @@ app.get('/random', (req,res) => {
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
     console.log('someone hitting upload route')
-    fs.writeFile(req.file.path, req.file.buffer, err => {
-      if (err) {
-        // Handle the error
-      } else {
+    // fs.writeFile(req.file.path, req.file.buffer, err => {
+    //   if (err) {
+    //     // Handle the error
+    //   } else {
         res.redirect('http://139.177.207.245:3000/');
-      }
-    });
+    //   }
+    // });
   });
 
 app.listen(port, () => {
