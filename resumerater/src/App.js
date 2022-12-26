@@ -40,8 +40,8 @@ function App() {
   const handleFileChangeData = (data) => {
     if (data) {
       console.log("Handling new data")
-      setPdf1(e.target.files[0]);
-      setPdf2(e.target.files[0]);
+      setPdf1(data);
+      setPdf2(data);
     } else {
       console.log("No data")
     }
