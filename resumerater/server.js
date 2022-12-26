@@ -20,7 +20,7 @@ app.get('/random', (req,res) => {
   // res.contentType("application/pdf");
   // res.send(data);
 
-  res.json({'code':'b42e0deb847222f8638ff429ab2b6b23'});
+  res.json({'b42e0deb847222f8638ff429ab2b6b23'});
 });
 
 app.post('/upload', upload.single('pdf'), (req, res) => {

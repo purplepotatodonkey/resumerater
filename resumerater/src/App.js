@@ -38,7 +38,7 @@ function App() {
       let response = await fetch('http://139.177.207.245:5000/random', {
         method: 'GET',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        // headers: { 'Content-Type': 'application/json' },
         // responseType: 'arraybuffer',
       })
 
@@ -59,8 +59,8 @@ function App() {
       // console.log(data)
       // console.log("setting response")
       // handleFileChangeData(data);
-      const data = await response.json();
-      console.log(data.code[0])
+      const data = await response.text();
+      console.log(data)
 
 
       // setPdfstr1(data);
