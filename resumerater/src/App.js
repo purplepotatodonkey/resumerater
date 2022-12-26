@@ -39,7 +39,7 @@ function App() {
         method: 'GET',
         mode: 'no-cors',
         // contentType: 'application/pdf',
-        responseType: 'arraybuffer',
+        // responseType: 'arraybuffer',
       })
 
       // .then(response => response.blob())
