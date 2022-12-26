@@ -13,7 +13,10 @@ app.use(express.static('uploads'));
 
 app.get('/random', (req,res) => {
   console.log("Fetching Random PDF");
-  res.sendFile('/root/resumerater/uploads/b42e0deb847222f8638ff429ab2b6b23');
+  // res.sendFile('/root/resumerater/uploads/b42e0deb847222f8638ff429ab2b6b23');
+  var data =fs.readFileSync('/root/resumerater/uploads/b42e0deb847222f8638ff429ab2b6b23');
+  res.contentType("application/pdf");
+  res.send(data);
 });
 
 app.post('/upload', upload.single('pdf'), (req, res) => {

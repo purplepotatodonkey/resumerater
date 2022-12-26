@@ -25,13 +25,14 @@ function App() {
       console.log("Fetching a random pdf from server...")
       let response = await fetch('http://139.177.207.245:5000/random', {
         method: 'GET',
-        mode: 'no-cors'
+        mode: 'no-cors',
+        responseType: 'arraybuffer',
       });
       console.log("request made")
       let data = await response.data;
       console.log(data)
       console.log("setting response")
-      // setPdf1(data[0]);
+      setPdf1(data);
   }
 
   const handleFileChange = (e) => {
