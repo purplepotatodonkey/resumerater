@@ -36,8 +36,8 @@ function App() {
   const getRandomPDF = async(e) => {
       console.log("Fetching a random pdf from server...")
       const response = await fetch('http://139.177.207.245:5000/random', {
-        method: 'GET',
-        mode: 'no-cors',
+        method: 'GET'
+        // mode: 'no-cors',
         // headers: { 'Content-Type': 'application/json' },
         // responseType: 'arraybuffer',
       })

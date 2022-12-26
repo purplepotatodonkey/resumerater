@@ -5,7 +5,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
-app.use(express.static('uploads'));
+app.use('/uploads/',express.static('uploads'));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
