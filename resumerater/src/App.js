@@ -27,6 +27,7 @@ function App() {
         method: 'GET',
         mode: 'no-cors'
       });
+      console.log("request made")
       let data = await response.json();
       console.log("setting response")
       setPdf1(data[0]);
