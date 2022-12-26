@@ -20,11 +20,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/random', async(req,res) => {
+app.get('/random', (req,res) => {
   console.log("Fetching Random PDF");
   let cmd = "find /root/resumerater/uploads/* -name '*' | shuf -n 1"
     let output = "";
-    await exec(cmd, (err, stdout, stderr) => {
+    exec(cmd, (err, stdout, stderr) => {
                   if (err !== null) {
                           console.log('exec error: ' + err);
                   }
@@ -32,9 +32,9 @@ app.get('/random', async(req,res) => {
                   output = stdout.substring(26,stdout.length);
                   console.log(output)
                   console.log("FINISHED:")
+                  console.log("final res send output is: " + output)
+                  res.send(output);
     });
-  console.log("final res send output is: " + output)
-  res.send(output);
 });
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
