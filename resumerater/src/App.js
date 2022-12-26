@@ -7,51 +7,64 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 function App() {
 
-  const [samplePDF, setSamplePDF] = useState(null);
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pdf1, setPdf1] = useState(null);
+  const [pdf2, setPdf2] = useState(null);
+  const [numPages1, setNumPages1] = useState(null);
+  const [numPages2, setNumPages2] = useState(null);
+  const [pageNumber1, setPageNumber1] = useState(1);
+  const [pageNumber2, setPageNumber2] = useState(1);
 
   function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-    setPageNumber(1);
+    setNumPages1(numPages);
+    setNumPages2(numPages);
+    setPageNumber1(1);
+    setPageNumber2(1);
+  }
+
+  const getRandomPDF = async(e) => {
+      let response = await fetch('139.177.207.245:5000/random2', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      let data = await response.json();
+      setPdf1(data[0]);
   }
 
   const handleFileChange = (e) => {
     if (e.target.files) {
-      setSamplePDF(e.target.files[0]);
+      setPdf1(e.target.files[0]);
+      setPdf2(e.target.files[0]);
     }
   }
 
   return (
     <div className="App">
-      {/* <ReactPDF file={{data:renderPDF}}></ReactPDF> */}
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
       <div>Test</div>
       <input type="file" onChange={handleFileChange} />
-      {/* <Document file={samplePDF}>
-        <Page pageNumber={1} />
-      </Document> */}
-      <button onClick={(e) => setPageNumber(pageNumber+1)}>+</button>
-      <button onClick={(e) => setPageNumber(pageNumber-1)}>-</button>
-      <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess} style={{width:"90%",border:"5px solid gray"}}>
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+      <br></br>
+      <button onClick={(e)=>getRandomPDF()}>Get 2 Random PDFs From Database</button>
+      <br></br>
+      <br></br>
+      <div style={{position:"fixed",height:"100%",left:"5%",display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
+        {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}
+        {(pageNumber1>1)&&<button onClick={(e) => setPageNumber1(pageNumber1-1)}>-</button>}
+        <Document file={pdf1} onLoadSuccess={onDocumentLoadSuccess}>
+          <Page  style={{}} pageNumber={pageNumber1}/>
+        </Document>
+        <p>
+          Page {pageNumber1} of {numPages1}
+        </p>
+      </div>
+      <div style={{position:"fixed",height:"100%",right:"5%", display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
+        {(pageNumber2<numPages2)&&<button onClick={(e) => setPageNumber2(pageNumber2+1)}>+</button>}
+        {(pageNumber2>1)&&<button onClick={(e) => setPageNumber2(pageNumber2-1)}>-</button>}
+        <Document file={pdf2} onLoadSuccess={onDocumentLoadSuccess}>
+          <Page pageNumber={pageNumber2}/>
+        </Document>
+        <p>
+          Page {pageNumber2} of {numPages2}
+        </p>
+      </div>
     </div>
   );
 }
