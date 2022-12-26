@@ -44,14 +44,14 @@ function App() {
       {/* <Document file={samplePDF}>
         <Page pageNumber={1} />
       </Document> */}
-      <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess}>
+      <button onClick={(e) => setPageNumber(pageNumber+1)}>+</button>
+      <button onClick={(e) => setPageNumber(pageNumber-1)}>-</button>
+      <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess} style={{width:"90%",border:"5px solid gray"}}>
         <Page pageNumber={pageNumber} />
       </Document>
       <p>
         Page {pageNumber} of {numPages}
       </p>
-      <button onClick={(e) => setPageNumber(pageNumber+1)}>+</button>
-      <button onClick={(e) => setPageNumber(pageNumber-1)}>-</button>
     </div>
   );
 }
