@@ -38,7 +38,7 @@ function App() {
       let response = await fetch('http://139.177.207.245:5000/random', {
         method: 'GET',
         mode: 'no-cors',
-        // contentType: 'application/pdf',
+        headers: { 'Content-Type': 'application/json' },
         // responseType: 'arraybuffer',
       })
 
