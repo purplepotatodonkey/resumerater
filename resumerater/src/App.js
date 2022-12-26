@@ -81,7 +81,7 @@ function App() {
       <div style={{position:"fixed",height:"100%",left:"5%",display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
         {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}
         {(pageNumber1>1)&&<button onClick={(e) => setPageNumber1(pageNumber1-1)}>-</button>}
-        <Document file={pdfStr1} onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file={pdfstr1} onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber1}/>
         </Document>
         <p>
