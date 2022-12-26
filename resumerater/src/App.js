@@ -18,7 +18,11 @@ function App() {
 
   useEffect(() => {
     console.log(`pdfstr1 is ${pdfstr1} and pdfstr2 is ${pdfstr2}`)
-
+    if (pdfstr1) {
+      console.log(`pdfstr1 not null`)
+    } else {
+      console.log(`pdfstr1 is null`)
+    }
     console.log("One of the pdfs changed!")
   }, pdfstr1,pdfstr2)
 
