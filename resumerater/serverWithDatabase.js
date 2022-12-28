@@ -75,12 +75,12 @@ app.use((req, res, next) => {
         console.log('inserting entry ' + i + ' from files dir');
         let incmd = "files=/root/resumerater/resumerater/uploads/*;echo ${files[" + i + "]} | cut -d'/' -f 6"
         console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
-        await exec(incmd, (err, stdout, stderr) => {
+        await exec(incmd, (err2, stdout2, stderr2) => {
           if (err !== null) {
             console.log('exec error: ' + err);
           }
-          console.log("stdout is ... : " + stdout)
-          db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout, -1, "No description yet.");
+          console.log("stdout is ... : " + stdout2)
+          db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
         });
       }
     });
