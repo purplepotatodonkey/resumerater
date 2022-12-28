@@ -55,11 +55,37 @@ app.use((req, res, next) => {
   const Database = require('better-sqlite3');
   const db = new Database('resumes.db', { verbose: console.log });
   if(!PERSISTENT) {
+    console.log("not persistent so we drop table if exists and create table")
     db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
-  }
-  db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
-  if(!PERSISTENT) {
-    db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(5, 5, "This is a test description v2");
+    db.prepare('CREATE TABLE RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
+    console.log("done")
+        // }
+        // db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
+        // if(!PERSISTENT) {
+    let cmd = "ls | wc -l"
+    console.log("counting files:")
+    exec(cmd, (err, stdout, stderr) => {
+      if (err !== null) {
+        console.log('exec error: ' + err);
+      }
+      console.log(stdout)
+      output = parseInt(stdout);
+      console.log(output)
+      for(i=0;i<output;i++) {
+        console.log('inserting entry');
+        let incmd = "files=(/root/resumerater/resumerater/uploads/*);echo ${files[" + i + "]} | cut -d'/' -f 6)"
+        exec(incmd, (err, stdout, stderr) => {
+          if (err !== null) {
+            console.log('exec error: ' + err);
+          }
+          console.log(stdout)
+          db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout, -1, "No description yet.");
+        });
+      }
+    });
+  } else {
+    console.log("persistent so we just create table if not exists")
+    db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
   }
   const stmt = db.prepare('SELECT * FROM RESUME_TABLE');
 
