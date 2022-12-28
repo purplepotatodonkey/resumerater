@@ -64,7 +64,11 @@ app.use((req, res, next) => {
         // if(!PERSISTENT) {
     let cmd = "ls /root/resumerater/resumerater/uploads/ | wc -l"
     console.log("counting files:")
-    // exec(cmd, async (err, stdout, stderr) => {
+
+
+
+
+    // exec(cmd, (err, stdout, stderr) => {
       // if (err !== null) {
         // console.log('exec error: ' + err);
       // }
@@ -72,7 +76,7 @@ app.use((req, res, next) => {
       // output = parseInt(stdout);
       // console.log(output)
       // for(i=0;i<output;i++) {
-        // await setTimeout(() => {
+        // setTimeout(() => {
           // console.log('inserting entry ' + i + ' from files dir');
           // let incmd = "files=/root/resumerater/resumerater/uploads/*;echo ${files[" + i + "]} | cut -d'/' -f 6"
           // console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
@@ -87,19 +91,40 @@ app.use((req, res, next) => {
         // console.log("done execing incmd for i=" + i);
       // }
     // });
-    await (async () => {
-      await new Promise(resolve => setTimeout(resolve, 3000));
+async function run() {
+  exec(cmd, async (err, stdout, stderr) => {
+    if (err !== null) {
+      console.log('exec error: ' + err);
+    }
+    console.log(stdout)
+    output = parseInt(stdout);
+    console.log(output)
+    for (let i = 0; i < output; i++) {
       console.log('inserting entry ' + i + ' from files dir');
       let incmd = "files=/root/resumerater/resumerater/uploads/*;echo ${files[" + i + "]} | cut -d'/' -f 6"
       console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
-      exec(incmd, (err2, stdout2, stderr2) => {
-        if (err !== null) {
-          console.log('exec error: ' + err);
-        }
-        console.log("stdout is ... : " + stdout2)
-        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
+      await new Promise(resolve => {
+        exec(incmd, (err2, stdout2, stderr2) => {
+          if (err !== null) {
+            console.log('exec error: ' + err);
+          }
+          console.log("stdout is ... : " + stdout2)
+          db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
+          resolve();
+        });
       });
-    })();
+      console.log("done execing incmd for i=" + i);
+      await Promise.resolve();
+    }
+  });
+}
+
+run();
+
+
+
+
+
   } else {
     console.log("persistent so we just create table if not exists")
     db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
