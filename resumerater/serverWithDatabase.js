@@ -7,7 +7,7 @@ const exec = require('child_process').exec;
 const fs = require('fs');
 var cors = require('cors');
 
-const PERSISTENT = true;
+const PERSISTENT = false;
 
 //  We will need:
 // CREATE TABLE RESUME_TABLE (id INTEGER PRIMARY KEY, rating INTEGER, description TEXT);
@@ -72,7 +72,7 @@ app.use((req, res, next) => {
       output = parseInt(stdout);
       console.log(output)
       for(i=0;i<output;i++) {
-        console.log('inserting entry');
+        console.log('inserting entry ' + i + ' from files dir');
         let incmd = "files=(/root/resumerater/resumerater/uploads/*);echo ${files[" + i + "]} | cut -d'/' -f 6)"
         exec(incmd, (err, stdout, stderr) => {
           if (err !== null) {
