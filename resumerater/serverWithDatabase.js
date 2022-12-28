@@ -64,7 +64,7 @@ app.use((req, res, next) => {
         // if(!PERSISTENT) {
     let cmd = "ls /root/resumerater/resumerater/uploads/ | wc -l"
     console.log("counting files:")
-    await exec(cmd, async (err, stdout, stderr) => {
+    exec(cmd, async (err, stdout, stderr) => {
       if (err !== null) {
         console.log('exec error: ' + err);
       }
