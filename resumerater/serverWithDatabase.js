@@ -64,7 +64,7 @@ app.use((req, res, next) => {
         // if(!PERSISTENT) {
     let cmd = "ls /root/resumerater/resumerater/uploads/ | wc -l"
     console.log("counting files:")
-    exec(cmd, (err, stdout, stderr) => {
+    exec(cmd, async (err, stdout, stderr) => {
       if (err !== null) {
         console.log('exec error: ' + err);
       }
@@ -72,7 +72,7 @@ app.use((req, res, next) => {
       output = parseInt(stdout);
       console.log(output)
       for(i=0;i<output;i++) {
-        setTimeout(() => {
+        await setTimeout(() => {
           console.log('inserting entry ' + i + ' from files dir');
           let incmd = "files=/root/resumerater/resumerater/uploads/*;echo ${files[" + i + "]} | cut -d'/' -f 6"
           console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
