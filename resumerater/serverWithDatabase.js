@@ -78,7 +78,7 @@ app.use((req, res, next) => {
           if (err !== null) {
             console.log('exec error: ' + err);
           }
-          console.log(stdout)
+          console.log("stdout is ... : " + stdout)
           db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout, -1, "No description yet.");
         });
       }
