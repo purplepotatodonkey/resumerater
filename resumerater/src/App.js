@@ -16,6 +16,7 @@ function App() {
   const [numPages2, setNumPages2] = useState(null);
   const [pageNumber1, setPageNumber1] = useState(1);
   const [pageNumber2, setPageNumber2] = useState(1);
+  const [resAPI, setResAPI] = useState('');
 
   useEffect(() => {
     console.log(`pdfstr1 is ${pdfstr1} and pdfstr2 is ${pdfstr2}`)
@@ -26,6 +27,42 @@ function App() {
     setNumPages2(numPages);
     setPageNumber1(1);
     setPageNumber2(1);
+  }
+
+  // const runServerQueryTest = async() => {
+  //   console.log("Fetching random request from server...")
+  //   const response = await fetch('http://localhost:5000/test', {
+  //     method: 'GET'
+  //   })
+  //   const data = await response.text();
+  //   console.log(data)
+  // }
+  const getAllResumesFromDB = async() => {
+    console.log("Getting all resumes from DB...")
+    const response = await fetch('http://139.177.207.245:5000/db_get_all_resumes', {
+      method: 'GET'
+    })
+    const data = await response.text();
+    console.log(data)
+    setResAPI(data)
+  }
+  const resetEntireDB = async() => {
+    console.log(`Resetting the entire DB...`)
+    const response = await fetch('http://139.177.207.245:5000/db_reset', {
+      method: 'GET'
+    })
+    const data = await response.text();
+    console.log(data)
+    setResAPI(data)
+  }
+  const addEntryToDB = async() => {
+    console.log(`Adding Ranom Entry to DB (Server chooses this)...`)
+    const response = await fetch('http://139.177.207.245:5000/db_add_entry', {
+      method: 'GET'
+    })
+    const data = await response.text();
+    console.log(data)
+    setResAPI(data)
   }
 
   // const onChange = (event) => {
@@ -61,6 +98,7 @@ function App() {
       console.log(data2)
       setPdfstr1("http://139.177.207.245:5000/uploads/" + data);
       setPdfstr2("http://139.177.207.245:5000/uploads/" + data2);
+      setResAPI("Successfully retrieved Random PDF")
   }
 
   const handleFileChangeData = (data) => {
@@ -98,6 +136,14 @@ function App() {
 
       <br></br>
       <button onClick={getRandomPDF}>Get 2 Random PDFs From Database</button>
+      <br></br>
+      <button onClick={getAllResumesFromDB}>Console Log All Resumes from DB</button>
+      <br></br>
+      <button onClick={resetEntireDB}>Reset Entire DB</button>
+      <br></br>
+      <button onClick={addEntryToDB}>Add Random Entry to DB</button>
+      <br></br>
+      <div>{resAPI}</div>
       <br></br>
       <div style={{position:"fixed",height:"100%",left:"5%",display:'inline', width:"40%",border:"5px solid gray",fontSize:"1px"}}>
         {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}
