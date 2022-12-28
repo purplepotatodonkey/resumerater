@@ -62,7 +62,7 @@ app.use((req, res, next) => {
         // }
         // db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
         // if(!PERSISTENT) {
-    let cmd = "ls | wc -l"
+    let cmd = "ls /root/resumerater/resumerater/uploads/ | wc -l"
     console.log("counting files:")
     exec(cmd, (err, stdout, stderr) => {
       if (err !== null) {
