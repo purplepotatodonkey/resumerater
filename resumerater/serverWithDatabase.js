@@ -82,6 +82,7 @@ app.use((req, res, next) => {
           console.log("stdout is ... : " + stdout2)
           db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
         });
+        console.log("done execing incmd for i=" + i);
       }
     });
   } else {
