@@ -53,7 +53,7 @@ app.use((req, res, next) => {
       let i=0;
       for(i=0;i<output.length-1;i++) {
         console.log("output[" + i + "] is: " + output[i]);
-        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
+        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], 5, "No description yet.");
       }
     });
   } else {
@@ -98,7 +98,7 @@ app.use((req, res, next) => {
       let i=0;
       for(i=0;i<output.length-1;i++) {
         console.log("output[" + i + "] is: " + output[i]);
-        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
+        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], 5, "No description yet.");
       }
     });
     res.send("success clearing & reloading database");
@@ -154,7 +154,7 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
       let i=0;
       for(i=0;i<output.length-1;i++) {
         console.log("output[" + i + "] is: " + output[i]);
-        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
+        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], 5, "No description yet.");
       }
     });
     res.redirect('http://139.177.207.245:3000/');
