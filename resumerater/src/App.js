@@ -63,6 +63,10 @@ function App() {
     const data = await response.text();
     console.log(data)
     setResAPI(data)
+    setTimeout(() => {
+      console.log("geting new pdfs...")
+      getRandomPDF(e);
+    },500)
   }
   const rateRight = async() => {
     console.log(`Rating Right over Left`)
@@ -72,6 +76,10 @@ function App() {
     const data = await response.text();
     console.log(data)
     setResAPI(data)
+    setTimeout(() => {
+      console.log("geting new pdfs...")
+      getRandomPDF(e);
+    },500)
   }
 
   const getRandomPDF = async(e) => {
