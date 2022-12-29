@@ -63,8 +63,8 @@ function App() {
     const data = await response.text();
     console.log(data)
     setResAPI(data)
-    setPdfrating1(pdfrating1+1)
-    setPdfrating2(pdfrating1-1)
+    setPdfrating1(parseInt(pdfrating1)+1)
+    setPdfrating2(parseInt(pdfrating2)-1)
     setTimeout(() => {
       console.log("geting new pdfs...")
       getRandomPDF();
@@ -78,8 +78,8 @@ function App() {
     const data = await response.text();
     console.log(data)
     setResAPI(data)
-    setPdfrating1(pdfrating1-1)
-    setPdfrating2(pdfrating1+1)
+    setPdfrating1(parseInt(pdfrating1)-1)
+    setPdfrating2(parseInt(pdfrating2)+1)
     setTimeout(() => {
       console.log("geting new pdfs...")
       getRandomPDF();
