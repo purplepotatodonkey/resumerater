@@ -23,6 +23,9 @@ function App() {
   const [pageNumber2, setPageNumber2] = useState(1);
   const [resAPI, setResAPI] = useState('');
   const [rateButtonText, setRateButtonText] = useState('Start Rating');
+  const [descriptionChangeOn, setDescriptionChangeOn] = useState(false);
+  const [descChangeText, setDescChangeText] = useState('');
+  const [descChangeDirection, setDescChangeDirection] = useState('L');
 
   function onDocumentLoadSuccess1({ numPages }) {
     setNumPages1(numPages);
@@ -130,6 +133,37 @@ function App() {
     }
   }
 
+  const handleLeftDesc = (e) => {
+    setDescriptionChangeOn(true)
+    setDescChangeDirection('L')
+    setDescChangeText(pdfdesc1)
+  }
+  const handleRightDesc = (e) => {
+    setDescriptionChangeOn(true)
+    setDescChangeDirection('R')
+    setDescChangeText(pdfdesc2)
+  }
+  const handleDescChangeClose = (e) => {
+    setDescriptionChangeOn(false)
+  }
+  const handleDescChangeSubmit = async(e) => {
+    setDescriptionChangeOn(false)
+    console.log('Submitting new description...')
+    let idtoupdate = '';
+    (descChangeDirection === 'L') ? idtoupdate = pdfstr1.substring(36) : idtoupdate = pdfstr2.substring(36)
+    const response = await fetch('http://139.177.207.245:5000/updatedesc/'+idtoupdate, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ description: descChangeText })
+    })
+    const data = await response.text();
+    console.log(data)
+    setResAPI(data)
+  }
+  const handleDescChange = (e) => {
+    setDescChangeText(e.target.value)
+  }
+
   return (
     <div className="App">
       <div>Test</div>
@@ -144,7 +178,7 @@ function App() {
       <br></br>
       {pdfstr1 && <div style={{position:"fixed",top:"50px",left:"15%",width:"25%"}}>id: {pdfstr1.substring(36)}</div>}
       {pdfrating1 && <div style={{position:"fixed",top:"75px",left:"15%",width:"25%"}}>rating: {pdfrating1}</div>}
-      {pdfdesc1 && <div style={{position:"fixed",top:"100px",left:"15%",width:"25%"}}>description: {pdfdesc1}</div>}
+      {pdfdesc1 && <div style={{position:"fixed",top:"100px",left:"15%",width:"25%"}}>description: {pdfdesc1} <button onClick={handleLeftDesc}>➕</button></div>}
       <div>{resAPI}</div>
       {pdfstr1 && <div style={{position:"fixed",top:"130px",left:"5%",display:'inline', width:"40%"}}>
         {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}
@@ -158,7 +192,7 @@ function App() {
       </div>}
       {pdfstr2 && <div style={{position:"fixed",top:"50px",right:"15%",width:"25%"}}>id: {pdfstr2.substring(36)}</div>}
       {pdfrating2 && <div style={{position:"fixed",top:"75px",right:"15%",width:"25%"}}>rating: {pdfrating2}</div>}
-      {pdfdesc2 && <div style={{position:"fixed",top:"100px",right:"15%",width:"25%"}}>description: {pdfdesc2}</div>}
+      {pdfdesc2 && <div style={{position:"fixed",top:"100px",right:"15%",width:"25%"}}>description: {pdfdesc2} <button onClick={handleRightDesc}>➕</button></div>}
       {pdfstr2 && <div style={{position:"fixed",top:"130px",right:"5%", display:'inline', width:"40%"}}>
         {(pageNumber2<numPages2)&&<button onClick={(e) => setPageNumber2(pageNumber2+1)}>+</button>}
         {(pageNumber2>1)&&<button onClick={(e) => setPageNumber2(pageNumber2-1)}>-</button>}
@@ -169,6 +203,7 @@ function App() {
           Page {pageNumber2} of {numPages2}
         </p>
       </div>}
+      {descriptionChangeOn && <div style={{fontSize:"50px",backgroundColor:"red", zIndex: 2, position: "absolute", top: "300px", left: "50%", padding:"30px", transform: "translate(-50%, -50%)"}}><div style={{}}>Change Description? <button onClick={handleDescChangeClose} style={{}}>❌</button></div><textarea style={{}} value={descChangeText} onChange={handleDescChange} /><button onClick={handleDescChangeSubmit}>✅</button></div>}
       {pdfrating1 && <button className={"hoverbig"} style={{fontSize:"60px",backgroundColor:"red", zIndex: 1, position: "absolute", top: "500px", left: "40%", transform: "translate(-50%, -50%)"}} onClick={rateLeft}>💓</button>}
       {pdfrating2 && <button className={"hoverbig"} style={{fontSize:"60px",backgroundColor:"red", zIndex: 1, position: "absolute", top: "500px", right: "40%", transform: "translate(50%, -50%)"}} onClick={rateRight}>💓</button>}
     </div>
