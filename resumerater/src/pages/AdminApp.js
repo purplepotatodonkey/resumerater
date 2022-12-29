@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-function App() {
+function AdminApp() {
 
   const [file, setFile] = useState(null);
   const [pdf1, setPdf1] = useState(null);
@@ -146,7 +146,7 @@ function App() {
         <input type="file" onChange={handleFileChange} name="pdf" accept="application/pdf"></input>
         <button type="submit">Upload PDF</button>
       </form>
-      <Link to={'/AdminApp'}><button>Go To Admin Page</button></Link>
+      <Link to={'/'}><button>Go To Main Page</button></Link>
 
     {/* <form onSubmit={onSubmit}> */}
       {/* <label htmlFor="file">Choose a file:</label> */}
@@ -191,4 +191,4 @@ function App() {
   );
 }
 
-export default App;
+export default AdminApp;
