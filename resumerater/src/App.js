@@ -162,15 +162,15 @@ function App() {
     setDescriptionChangeOn(false)
     console.log('Submitting new description...')
     let idtoupdate = '';
-    (descChangeDirection === 'L') ? idtoupdate = pdfstr1.substring(36) : idtoupdate = pdfstr2.substring(36)
+    (descChangeDirection === 'L') ? (idtoupdate = pdfstr1.substring(36)) : (idtoupdate = pdfstr2.substring(36))
     console.log('ID to update: ' + idtoupdate)
     console.log('descChangeText: ' + descChangeText)
     const response = await fetch('http://139.177.207.245:5000/updatedesc', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: idtoupdate.substring(0,idtoupdate.length-1), desc: descChangeText })
-    })
-    // const data = await response.json();
+    });
+    const data = await response.json();
     // console.log(data.message)
     // let output = JSON.stringify(data.message);
     // console.log(output)
