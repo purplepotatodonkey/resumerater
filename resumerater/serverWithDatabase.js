@@ -8,6 +8,8 @@ const fs = require('fs');
 var cors = require('cors');
 
 const PERSISTENT = false;
+// FALSE => RESET DB AND LOAD WITH FILES FROM DIR AS IDs, WITH DEFAULT RATING/DESCRIPTION
+// TRUE => CREATE DB IF NOT EXISTS (NOTHING IF ALREADY EXISTS)
 
 //  We will need:
 // CREATE TABLE RESUME_TABLE (id INTEGER PRIMARY KEY, rating INTEGER, description TEXT);
