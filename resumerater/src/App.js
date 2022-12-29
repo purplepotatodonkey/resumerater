@@ -52,6 +52,24 @@ function App() {
     console.log(data)
     setResAPI(data)
   }
+  const rateLeft = async() => {
+    console.log(`Rating Left over Right`)
+    const response = await fetch('http://139.177.207.245:5000/rate/'+pdfstr1.substring(36)+"/"+pdfstr2.substring(36), {
+      method: 'GET'
+    })
+    const data = await response.text();
+    console.log(data)
+    setResAPI(data)
+  }
+  const rateRight = async() => {
+    console.log(`Rating Right over Left`)
+    const response = await fetch('http://139.177.207.245:5000/rate/'+pdfstr2.substring(36)+"/"+pdfstr1.substring(36), {
+      method: 'GET'
+    })
+    const data = await response.text();
+    console.log(data)
+    setResAPI(data)
+  }
 
   const getRandomPDF = async(e) => {
       console.log("Fetching 2 random pdfs from server...")
@@ -123,11 +141,11 @@ function App() {
       <br></br>
       <button onClick={getRandomPDF}>{rateButtonText}</button>
       <br></br>
-      <div>{resAPI}</div>
       <br></br>
-      {pdfstr1 && <div style={{position:"fixed",top:"70px",left:"15%",width:"25%"}}>id: {pdfstr1.substring(36)}</div>}
-      {pdfrating1 && <div style={{position:"fixed",top:"85px",left:"15%",width:"25%"}}>rating: {pdfrating1}</div>}
+      {pdfstr1 && <div style={{position:"fixed",top:"50px",left:"15%",width:"25%"}}>id: {pdfstr1.substring(36)}</div>}
+      {pdfrating1 && <div style={{position:"fixed",top:"75px",left:"15%",width:"25%"}}>rating: {pdfrating1}</div>}
       {pdfdesc1 && <div style={{position:"fixed",top:"100px",left:"15%",width:"25%"}}>description: {pdfdesc1}</div>}
+      <div>{resAPI}</div>
       {pdfstr1 && <div style={{position:"fixed",top:"130px",left:"5%",display:'inline', width:"40%"}}>
         {(pageNumber1<numPages1)&&<button onClick={(e) => setPageNumber1(pageNumber1+1)}>+</button>}
         {(pageNumber1>1)&&<button onClick={(e) => setPageNumber1(pageNumber1-1)}>-</button>}
@@ -138,8 +156,8 @@ function App() {
           Page {pageNumber1} of {numPages1}
         </p>
       </div>}
-      {pdfstr2 && <div style={{position:"fixed",top:"70px",right:"15%",width:"25%"}}>id: {pdfstr2.substring(36)}</div>}
-      {pdfrating2 && <div style={{position:"fixed",top:"85px",right:"15%",width:"25%"}}>rating: {pdfrating2}</div>}
+      {pdfstr2 && <div style={{position:"fixed",top:"50px",right:"15%",width:"25%"}}>id: {pdfstr2.substring(36)}</div>}
+      {pdfrating2 && <div style={{position:"fixed",top:"75px",right:"15%",width:"25%"}}>rating: {pdfrating2}</div>}
       {pdfdesc2 && <div style={{position:"fixed",top:"100px",right:"15%",width:"25%"}}>description: {pdfdesc2}</div>}
       {pdfstr2 && <div style={{position:"fixed",top:"130px",right:"5%", display:'inline', width:"40%"}}>
         {(pageNumber2<numPages2)&&<button onClick={(e) => setPageNumber2(pageNumber2+1)}>+</button>}
@@ -151,6 +169,8 @@ function App() {
           Page {pageNumber2} of {numPages2}
         </p>
       </div>}
+      {pdfrating1 && <button className={"hoverbig"} style={{fontSize:"80px",backgroundColor:"green", zIndex: 1, position: "absolute", top: "500px", left: "40%",opacity:"0.3", transform: "translate(-50%, -50%)"}} onClick={rateLeft}>💓</button>}
+      {pdfrating2 && <button className={"hoverbig"} style={{fontSize:"80px",backgroundColor:"green", zIndex: 1, position: "absolute", top: "500px", right: "40%",opacity:"0.3", transform: "translate(50%, -50%)"}} onClick={rateRight}>💓</button>}
     </div>
   );
 }
