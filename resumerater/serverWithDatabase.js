@@ -125,7 +125,7 @@ app.get('/rate/:idw/:idl', (req,res) => {
   console.log("Fetching desc from pdf with id " + id);
   db.prepare('UPDATE RESUME_TABLE SET rating=rating+1 WHERE id = ?').run(idw);
   db.prepare('UPDATE RESUME_TABLE SET rating=rating-1 WHERE id = ?').run(idl);
-  res.send("incremented " + idw + " and decremented " + idl);
+  res.send(`incremented ${idw} and decremented ${idl}`);
 });
 
 app.get('/random', (req,res) => {
