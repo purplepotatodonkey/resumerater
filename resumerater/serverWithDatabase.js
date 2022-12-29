@@ -123,13 +123,25 @@ app.get('/random', (req,res) => {
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
     console.log('someone hitting upload route')
-    // fs.writeFile(req.file.path, req.file.buffer, err => {
-    //   if (err) {
-    //     // Handle the error
-    //   } else {
-        res.redirect('http://139.177.207.245:3000/');
-    //   }
-    // });
+    res.redirect('http://139.177.207.245:3000/');
+    db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
+    db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
+    let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
+    exec(cmd, (err, stdout, stderr) => {
+      if (err !== null) {
+        console.log('exec error: ' + err);
+      }
+      console.log("output is: " + stdout)
+      output = stdout.split(/\r?\n/);
+      // 👇️ ['first', 'second', 'third']
+      console.log("output is: " + output + " and its length is: " + output.length);
+      console.log("output[0] is: " + output[0] + " and output[length-2] is: " + output[output.length-2]);
+      let i=0;
+      for(i=0;i<output.length-1;i++) {
+        console.log("output[" + i + "] is: " + output[i]);
+        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
+      }
+    });
   });
 
 app.listen(port, () => {
