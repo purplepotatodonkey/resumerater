@@ -71,7 +71,7 @@ app.use((req, res, next) => {
   app.get('/db_reset', (req,res) => {
     console.log("Resetting entire database");
     db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
-    db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id INTEGER PRIMARY KEY, rating INTEGER, description TEXT)').run();
+    db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
     res.send("success reseting database");
   });
   app.get('/db_add_entry', (req,res) => {
