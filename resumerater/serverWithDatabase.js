@@ -129,6 +129,7 @@ app.get('/rate/:idw/:idl', (req,res) => {
 app.post('/updatedesc/:id', (req,res) => {
   const id = req.body.id;
   const desc = req.body.desc;
+  console.log("Updating desc for pdf with id " + id + " to " + desc)
   db.prepare('UPDATE RESUME_TABLE SET description = ? WHERE id = ?').run(desc,id);
   res.send(`updated description`);
 });
