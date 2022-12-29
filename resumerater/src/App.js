@@ -158,8 +158,8 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: idtoupdate, desc: descChangeText })
     })
-    const data = await response.text();
-    console.log(data)
+    const data = await response.json();
+    console.log(JSON.parse(data))
     setResAPI(data)
     (descChangeDirection === 'L') ? setPdfdesc1(descChangeText) : setPdfdesc2(descChangeText)
   }
