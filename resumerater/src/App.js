@@ -156,7 +156,7 @@ function App() {
     const response = await fetch('http://139.177.207.245:5000/updatedesc', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: idtoupdate, desc: descChangeText })
+      body: JSON.stringify({ id: idtoupdate.substring(0,idtoupdate.length-1), desc: descChangeText })
     })
     const data = await response.json();
     console.log(data.message)
