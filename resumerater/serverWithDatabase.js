@@ -108,6 +108,7 @@ app.get('/getrating/:id', (req,res) => {
   const id = req.params.id;
   console.log("Fetching rating from pdf with id " + id);
     const stmt = db.prepare('SELECT rating FROM RESUME_TABLE WHERE id = ?').run(id);
+    console.log(stmt)
     res.send(stmt);
 });
 
@@ -115,6 +116,7 @@ app.get('/getdesc/:id', (req,res) => {
   const id = req.params.id;
   console.log("Fetching desc from pdf with id " + id);
     const stmt = db.prepare('SELECT description FROM RESUME_TABLE WHERE id = ?').run(id);
+    console.log(stmt)
     res.send(stmt);
 });
 
