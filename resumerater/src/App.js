@@ -64,6 +64,15 @@ function App() {
     console.log(data)
     setResAPI(data)
   }
+  const loadFromDirDB = async() => {
+    console.log(`Adding Ranom Entry to DB (Server chooses this)...`)
+    const response = await fetch('http://139.177.207.245:5000/db_load_from_dir', {
+      method: 'GET'
+    })
+    const data = await response.text();
+    console.log(data)
+    setResAPI(data)
+  }
 
   // const onChange = (event) => {
   //   setFile(event.target.files[0]);
@@ -142,6 +151,8 @@ function App() {
       <button onClick={resetEntireDB}>Reset Entire DB</button>
       <br></br>
       <button onClick={addEntryToDB}>Add Random Entry to DB</button>
+      <br></br>
+      <button onClick={loadFromDirDB}>Load DB With Files from Dir</button>
       <br></br>
       <div>{resAPI}</div>
       <br></br>
