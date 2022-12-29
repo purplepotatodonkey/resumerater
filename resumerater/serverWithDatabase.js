@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   if(!PERSISTENT) {
     console.log("not persistent so we drop table if exists and create table")
     db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
-    db.prepare('CREATE TABLE RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
+    db.prepare('CREATE TABLE EXISTS RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
     console.log("done")
     let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
     exec(cmd, (err, stdout, stderr) => {
@@ -46,7 +46,6 @@ app.use((req, res, next) => {
       }
       console.log("output is: " + stdout)
       output = stdout.split(/\r?\n/);
-      // 👇️ ['first', 'second', 'third']
       console.log("output is: " + output + " and its length is: " + output.length);
       console.log("output[0] is: " + output[0] + " and output[length-2] is: " + output[output.length-2]);
       let i=0;
@@ -57,7 +56,7 @@ app.use((req, res, next) => {
     });
   } else {
     console.log("persistent so we just create table if not exists")
-    db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
+    db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
   }
   const stmt = db.prepare('SELECT * FROM RESUME_TABLE');
 
