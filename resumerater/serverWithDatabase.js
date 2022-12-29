@@ -122,7 +122,6 @@ app.get('/getdesc/:id', (req,res) => {
 app.get('/rate/:idw/:idl', (req,res) => {
   const idw = req.params.idw;
   const idl = req.params.idl;
-  console.log("Fetching desc from pdf with id " + id);
   db.prepare('UPDATE RESUME_TABLE SET rating=rating+1 WHERE id = ?').run(idw);
   db.prepare('UPDATE RESUME_TABLE SET rating=rating-1 WHERE id = ?').run(idl);
   res.send(`incremented ${idw} and decremented ${idl}`);
