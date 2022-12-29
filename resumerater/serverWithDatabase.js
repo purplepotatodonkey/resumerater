@@ -7,7 +7,7 @@ const exec = require('child_process').exec;
 const fs = require('fs');
 var cors = require('cors');
 
-const PERSISTENT = false;
+const PERSISTENT = true;
 
 //  We will need:
 // CREATE TABLE RESUME_TABLE (id INTEGER PRIMARY KEY, rating INTEGER, description TEXT);
@@ -16,26 +16,6 @@ const PERSISTENT = false;
 // SELECT * FROM RESUME_TABLE WHERE ID = ? RATING > ?
 // UPDATE RESUME_TABLE SET RATING = ? WHERE ID = ?
 // REMOVE FROM RESUME_TABLE WHERE ID = ?
-
-
-  // const stmt = db.prepare('SELECT name, age FROM cats');
-  // const insert = db.prepare('INSERT INTO cats (name, age) VALUES (@name, @age)');
-  // const insertMany = db.transaction((cats) => {
-  //   for (const cat of cats) insert.run(cat);
-  // });
-  // insertMany([
-  //   { name: 'Joey', age: 2 },
-  //   { name: 'Sally', age: 4 },
-  //   { name: 'Junior', age: 1 },
-  // ]);
-  // const newExpense = db.prepare('INSERT INTO expenses (note, dollars) VALUES (?, ?)');
-  // const adopt = db.transaction((cats) => {
-  //   newExpense.run('adoption fees', 20);
-  //   insertMany(cats); // nested transaction
-  // });
-  // const stmt = db.prepare('INSERT INTO cats (name, age) VALUES (?, ?)');
-  // const info = stmt.run('Joey', 2);
-  // console.log(info.changes); // => 1
 
 app.use(cors());
 app.use('/uploads/',express.static('/root/resumerater/resumerater/uploads/'));
@@ -59,17 +39,6 @@ app.use((req, res, next) => {
     db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
     db.prepare('CREATE TABLE RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
     console.log("done")
-        // }
-        // db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
-        // if(!PERSISTENT) {
-      // let cmd = "ls /root/resumerater/resumerater/uploads/ | wc -l"
-      // console.log("counting files:")
-
-
-    // get a list of ids
-    // ls -1 /root/resumerater/resumerater/uploads/
-    // take the stdout and delimit by newlines in Javascript
-    // insert individually
     let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
     exec(cmd, (err, stdout, stderr) => {
       if (err !== null) {
@@ -86,78 +55,6 @@ app.use((req, res, next) => {
         db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
       }
     });
-
-
-
-
-    // exec(cmd, (err, stdout, stderr) => {
-      // if (err !== null) {
-        // console.log('exec error: ' + err);
-      // }
-      // console.log(stdout)
-      // output = parseInt(stdout);
-      // console.log(output)
-      // for(i=0;i<output;i++) {
-        // setTimeout(() => {
-          // console.log('inserting entry ' + i + ' from files dir');
-          // let incmd = "files=/root/resumerater/resumerater/uploads/*;echo ${files[" + i + "]} | cut -d'/' -f 6"
-          // console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
-          // exec(incmd, (err2, stdout2, stderr2) => {
-            // if (err !== null) {
-              // console.log('exec error: ' + err);
-            // }
-            // console.log("stdout is ... : " + stdout2)
-            // db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
-          // });
-        // }, 3000);
-        // console.log("done execing incmd for i=" + i);
-      // }
-    // });
-// async function run() {
-//   exec(cmd, async (err, stdout, stderr) => {
-//     if (err !== null) {
-//       console.log('exec error: ' + err);
-//     }
-//     console.log(stdout)
-//     output = parseInt(stdout);
-//     console.log(output)
-//     for (let i = 0; i < output; i++) {
-//       console.log('inserting entry ' + i + ' from files dir');
-//       let incmd = "files=(/root/resumerater/resumerater/uploads/*);echo ${files[" + i + "]}"
-//       console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
-//       await new Promise(resolve => {
-//         exec(incmd, (err2, stdout2, stderr2) => {
-//           if (err !== null) {
-//             console.log('exec error: ' + err);
-//           }
-//
-//
-//           // console.log("stdout is ... : " + stdout2)
-//           // db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
-//           // resolve();
-//
-//
-//           setTimeout(() => {
-//             console.log("stdout is ... : " + stdout2)
-//             db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
-//             resolve();
-//           }, 3000);
-//
-//
-//         });
-//       });
-//       console.log("done execing incmd for i=" + i);
-//       await Promise.resolve();
-//     }
-//   });
-// }
-//
-// run();
-
-
-
-
-
   } else {
     console.log("persistent so we just create table if not exists")
     db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
@@ -182,6 +79,25 @@ app.use((req, res, next) => {
     num = Math.floor(Math.random() * 10000);
     console.log(`Inserting an entry to database (${num}, 5, test description v2)`);
     db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(num, 5, "This is a test description v2");
+    res.send("success adding entry to database");
+  });
+  app.get('/db_load_from_dir', (req,res) => {
+    let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
+    exec(cmd, (err, stdout, stderr) => {
+      if (err !== null) {
+        console.log('exec error: ' + err);
+      }
+      console.log("output is: " + stdout)
+      output = stdout.split(/\r?\n/);
+      // 👇️ ['first', 'second', 'third']
+      console.log("output is: " + output + " and its length is: " + output.length);
+      console.log("output[0] is: " + output[0] + " and output[length-2] is: " + output[output.length-2]);
+      let i=0;
+      for(i=0;i<output.length-1;i++) {
+        console.log("output[" + i + "] is: " + output[i]);
+        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
+      }
+    });
     res.send("success adding entry to database");
   });
 
