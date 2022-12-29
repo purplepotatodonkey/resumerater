@@ -65,7 +65,7 @@ function App() {
     setResAPI(data)
     setTimeout(() => {
       console.log("geting new pdfs...")
-      getRandomPDF(e);
+      getRandomPDF();
     },500)
   }
   const rateRight = async() => {
