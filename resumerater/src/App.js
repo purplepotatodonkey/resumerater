@@ -65,7 +65,7 @@ function App() {
       })
       const data2 = await response2.text();
       console.log(data2)
-      const response3 = await fetch('http://139.177.207.245:5000/getrating'+data, {
+      const response3 = await fetch('http://139.177.207.245:5000/getrating/'+data, {
         method: 'GET'
       })
       const data3 = await response3.text();
