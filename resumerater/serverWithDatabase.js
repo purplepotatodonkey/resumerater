@@ -134,7 +134,7 @@ app.post('/updatedesc', (req,res) => {
   const desc = req.body.desc;
   console.log("Updating desc for pdf with id " + id + " to " + desc)
   db.prepare('UPDATE RESUME_TABLE SET description = ? WHERE id = ?').run(desc,id);
-  console.log(db.prepare('SELECT description FROM RESUME_TABLE WHERE id = ?').get(id).id);
+  db.prepare('SELECT description FROM RESUME_TABLE WHERE id = ?').run(id);
   res.json({message:'updated description'});
 });
 
