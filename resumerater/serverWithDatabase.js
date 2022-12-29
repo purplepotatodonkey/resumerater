@@ -80,7 +80,7 @@ app.use((req, res, next) => {
     num = Math.floor(Math.random() * 10000);
     console.log(`Inserting an entry to database (${num}, 5, test description v2)`);
     db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(num, 5, "This is a test description v2");
-    res.send("success adding entry to database");
+    res.send("success adding random entry to database");
   });
   app.get('/db_load_from_dir', (req,res) => {
     db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
@@ -101,7 +101,7 @@ app.use((req, res, next) => {
         db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
       }
     });
-    res.send("success adding entry to database");
+    res.send("success clearing & reloading database");
   });
 
 app.get('/random', (req,res) => {
