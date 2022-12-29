@@ -101,7 +101,7 @@ async function run() {
     console.log(output)
     for (let i = 0; i < output; i++) {
       console.log('inserting entry ' + i + ' from files dir');
-      let incmd = "files=(/root/resumerater/resumerater/uploads/*);echo ${files[" + i + "]} | cut -d'/' -f 6"
+      let incmd = "files=(/root/resumerater/resumerater/uploads/*);echo ${files[" + i + "]}"
       console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
       await new Promise(resolve => {
         exec(incmd, (err2, stdout2, stderr2) => {
