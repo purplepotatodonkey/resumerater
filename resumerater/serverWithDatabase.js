@@ -104,6 +104,26 @@ app.use((req, res, next) => {
     res.send("success clearing & reloading database");
   });
 
+app.get('/getrating/:id', (req,res) => {
+  const id = req.params.id;
+  console.log("Fetching rating from pdf with id " + id);
+    const stmt = db.prepare('SELECT rating FROM RESUME_TABLE WHERE id = ?').run(id);
+    stmt.all().forEach(({ id, rating, description }) => {
+      console.log(id, rating, description);
+    });
+    res.send(stmt.all());
+});
+
+app.get('/getdesc/:id', (req,res) => {
+  const id = req.params.id;
+  console.log("Fetching desc from pdf with id " + id);
+    const stmt = db.prepare('SELECT description FROM RESUME_TABLE WHERE id = ?').run(id);
+    stmt.all().forEach(({ id, rating, description }) => {
+      console.log(id, rating, description);
+    });
+    res.send(stmt.all());
+});
+
 app.get('/random', (req,res) => {
   console.log("Fetching Random PDF");
   let cmd = "find /root/resumerater/resumerater/uploads/* -name '*' | shuf -n 1"
