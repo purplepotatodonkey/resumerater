@@ -7,7 +7,7 @@ const exec = require('child_process').exec;
 const fs = require('fs');
 var cors = require('cors');
 
-const PERSISTENT = true;
+const PERSISTENT = false;
 
 //  We will need:
 // CREATE TABLE RESUME_TABLE (id INTEGER PRIMARY KEY, rating INTEGER, description TEXT);
