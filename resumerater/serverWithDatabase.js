@@ -129,7 +129,7 @@ app.get('/rate/:idw/:idl', (req,res) => {
   db.prepare('UPDATE RESUME_TABLE SET rating=rating-1 WHERE id = ?').run(idl);
   res.send(`incremented ${idw.substring(0,3)}... and decremented ${idl.substring(0,3)}...`);
 });
-app.post('/updatedesc/:id', (req,res) => {
+app.post('/updatedesc', (req,res) => {
   const id = req.body.id;
   const desc = req.body.desc;
   console.log("Updating desc for pdf with id " + id + " to " + desc)

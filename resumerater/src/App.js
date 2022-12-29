@@ -153,13 +153,14 @@ function App() {
     (descChangeDirection === 'L') ? idtoupdate = pdfstr1.substring(36) : idtoupdate = pdfstr2.substring(36)
     console.log('ID to update: ' + idtoupdate)
     console.log('descChangeText: ' + descChangeText)
-    const response = await fetch('http://139.177.207.245:5000/updatedesc/'+idtoupdate, {
+    const response = await fetch('http://139.177.207.245:5000/updatedesc', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: idtoupdate, desc: descChangeText })
     })
     const data = await response.text();
     console.log(data)
+    (descChangeDirection === 'L') ? setPdfdesc1(descChangeText) : setPdfdesc2(descChangeText)
     setResAPI(data)
   }
   const handleDescChange = (e) => {
