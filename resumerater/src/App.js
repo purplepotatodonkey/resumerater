@@ -170,10 +170,10 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: idtoupdate.substring(0,idtoupdate.length-1), desc: descChangeText })
     })
-    const data = await response.json();
-    console.log(data.message)
-    let output = JSON.stringify(data.message);
-    console.log(output)
+    // const data = await response.json();
+    // console.log(data.message)
+    // let output = JSON.stringify(data.message);
+    // console.log(output)
     (descChangeDirection === 'L') ? setPdfdesc1(descChangeText) : setPdfdesc2(descChangeText)
   }
   const handleDescChange = (e) => {
