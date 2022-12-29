@@ -53,6 +53,7 @@ app.use((req, res, next) => {
 });
 
   const Database = require('better-sqlite3');
+const { JavascriptError } = require('selenium-webdriver/lib/error');
   const db = new Database('resumes.db', { verbose: console.log });
   if(!PERSISTENT) {
     console.log("not persistent so we drop table if exists and create table")
@@ -62,8 +63,21 @@ app.use((req, res, next) => {
         // }
         // db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id VARCHAR PRIMARY KEY, rating INTEGER, description TEXT)').run();
         // if(!PERSISTENT) {
-    let cmd = "ls /root/resumerater/resumerater/uploads/ | wc -l"
-    console.log("counting files:")
+      // let cmd = "ls /root/resumerater/resumerater/uploads/ | wc -l"
+      // console.log("counting files:")
+
+
+    // get a list of ids
+    // ls -1 /root/resumerater/resumerater/uploads/
+    // take the stdout and delimit by newlines in Javascript
+    // insert individually
+    let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
+    exec(cmd, (err, stdout, stderr) => {
+      if (err !== null) {
+        console.log('exec error: ' + err);
+      }
+      console.log("output is: " + stdout)
+    });
 
 
 
@@ -91,46 +105,46 @@ app.use((req, res, next) => {
         // console.log("done execing incmd for i=" + i);
       // }
     // });
-async function run() {
-  exec(cmd, async (err, stdout, stderr) => {
-    if (err !== null) {
-      console.log('exec error: ' + err);
-    }
-    console.log(stdout)
-    output = parseInt(stdout);
-    console.log(output)
-    for (let i = 0; i < output; i++) {
-      console.log('inserting entry ' + i + ' from files dir');
-      let incmd = "files=(/root/resumerater/resumerater/uploads/*);echo ${files[" + i + "]}"
-      console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
-      await new Promise(resolve => {
-        exec(incmd, (err2, stdout2, stderr2) => {
-          if (err !== null) {
-            console.log('exec error: ' + err);
-          }
-
-
-          // console.log("stdout is ... : " + stdout2)
-          // db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
-          // resolve();
-
-
-          setTimeout(() => {
-            console.log("stdout is ... : " + stdout2)
-            db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
-            resolve();
-          }, 3000);
-
-
-        });
-      });
-      console.log("done execing incmd for i=" + i);
-      await Promise.resolve();
-    }
-  });
-}
-
-run();
+// async function run() {
+//   exec(cmd, async (err, stdout, stderr) => {
+//     if (err !== null) {
+//       console.log('exec error: ' + err);
+//     }
+//     console.log(stdout)
+//     output = parseInt(stdout);
+//     console.log(output)
+//     for (let i = 0; i < output; i++) {
+//       console.log('inserting entry ' + i + ' from files dir');
+//       let incmd = "files=(/root/resumerater/resumerater/uploads/*);echo ${files[" + i + "]}"
+//       console.log('incmd is: ' + incmd + " now we are awaiting exec incmd ...");
+//       await new Promise(resolve => {
+//         exec(incmd, (err2, stdout2, stderr2) => {
+//           if (err !== null) {
+//             console.log('exec error: ' + err);
+//           }
+//
+//
+//           // console.log("stdout is ... : " + stdout2)
+//           // db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
+//           // resolve();
+//
+//
+//           setTimeout(() => {
+//             console.log("stdout is ... : " + stdout2)
+//             db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
+//             resolve();
+//           }, 3000);
+//
+//
+//         });
+//       });
+//       console.log("done execing incmd for i=" + i);
+//       await Promise.resolve();
+//     }
+//   });
+// }
+//
+// run();
 
 
 
