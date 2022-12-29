@@ -174,7 +174,6 @@ function App() {
     console.log(data.message)
     let output = JSON.stringify(data.message);
     console.log(output)
-    setResAPI(output)
     (descChangeDirection === 'L') ? setPdfdesc1(descChangeText) : setPdfdesc2(descChangeText)
   }
   const handleDescChange = (e) => {
