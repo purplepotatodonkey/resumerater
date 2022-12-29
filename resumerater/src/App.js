@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import React,{useEffect, useState} from 'react';
-import {Document, Page, pdfjs } from 'react-pdf';
+import {Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
 import {Link} from "react-router-dom";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function App() {
 
