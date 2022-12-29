@@ -60,6 +60,7 @@
   height:100px;
   opacity: 0.2;
   border-radius: 10%;
+  background-color: lime;
 }
 
 .hoverbig:hover {
@@ -68,4 +69,5 @@
   opacity: 0.4;
   border-radius: 20%;
   transition: all 150ms;
+  background-color: green;
 }
