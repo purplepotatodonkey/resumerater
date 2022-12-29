@@ -53,7 +53,6 @@ app.use((req, res, next) => {
 });
 
   const Database = require('better-sqlite3');
-const { JavascriptError } = require('selenium-webdriver/lib/error');
   const db = new Database('resumes.db', { verbose: console.log });
   if(!PERSISTENT) {
     console.log("not persistent so we drop table if exists and create table")
