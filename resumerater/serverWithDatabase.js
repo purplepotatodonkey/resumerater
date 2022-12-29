@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   if(!PERSISTENT) {
     console.log("not persistent so we drop table if exists and create table")
     db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
-    db.prepare('CREATE TABLE EXISTS RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
+    db.prepare('CREATE TABLE RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
     console.log("done")
     let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
     exec(cmd, (err, stdout, stderr) => {
