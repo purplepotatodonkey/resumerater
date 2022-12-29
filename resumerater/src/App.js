@@ -63,6 +63,15 @@ function App() {
     const data = await response.text();
     console.log(data)
     setResAPI(data)
+
+    setTimeout(async() => {
+      const response2 = await fetch('http://139.177.207.245:5000/db_load_from_dir', {
+        method: 'GET'
+      })
+      const data2 = await response2.text();
+      console.log(data2)
+    }, 1000)
+
   }
   const loadFromDirDB = async() => {
     console.log(`Adding Ranom Entry to DB (Server chooses this)...`)
