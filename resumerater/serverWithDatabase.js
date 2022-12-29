@@ -21,6 +21,8 @@ const PERSISTENT = false;
 // REMOVE FROM RESUME_TABLE WHERE ID = ?
 
 app.use(cors());
+app.use(urlencoded({extended: true}))
+app.use(require('body-parser').json());
 app.use('/uploads/',express.static('/root/resumerater/resumerater/uploads/'));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
