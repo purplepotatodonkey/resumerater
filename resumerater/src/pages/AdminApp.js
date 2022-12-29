@@ -55,24 +55,24 @@ function AdminApp() {
     console.log(data)
     setResAPI(data)
   }
-  const addEntryToDB = async() => {
-    console.log(`Adding Ranom Entry to DB (Server chooses this)...`)
-    const response = await fetch('http://139.177.207.245:5000/db_add_entry', {
-      method: 'GET'
-    })
-    const data = await response.text();
-    console.log(data)
-    setResAPI(data)
+  // const addEntryToDB = async() => {
+  //   console.log(`Adding Ranom Entry to DB (Server chooses this)...`)
+  //   const response = await fetch('http://139.177.207.245:5000/db_add_entry', {
+  //     method: 'GET'
+  //   })
+  //   const data = await response.text();
+  //   console.log(data)
+  //   setResAPI(data)
 
-    setTimeout(async() => {
-      const response2 = await fetch('http://139.177.207.245:5000/db_load_from_dir', {
-        method: 'GET'
-      })
-      const data2 = await response2.text();
-      console.log(data2)
-    }, 1000)
+  //   setTimeout(async() => {
+  //     const response2 = await fetch('http://139.177.207.245:5000/db_load_from_dir', {
+  //       method: 'GET'
+  //     })
+  //     const data2 = await response2.text();
+  //     console.log(data2)
+  //   }, 1000)
 
-  }
+  // }
   const loadFromDirDB = async() => {
     console.log(`Adding Ranom Entry to DB (Server chooses this)...`)
     const response = await fetch('http://139.177.207.245:5000/db_load_from_dir', {
@@ -140,8 +140,6 @@ function AdminApp() {
       <button onClick={getAllResumesFromDB}>Console Log All Resumes from DB</button>
       <br></br>
       <button onClick={resetEntireDB}>Reset Entire DB</button>
-      <br></br>
-      <button onClick={addEntryToDB}>Add Random Entry to DB</button>
       <br></br>
       <button onClick={loadFromDirDB}>Load DB With Files from Dir</button>
       <br></br>
