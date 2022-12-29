@@ -160,7 +160,7 @@ function App() {
     })
     const data = await response.json();
     console.log(data.message)
-    setResAPI(data.message)
+    setResAPI(data.message.toString())
     (descChangeDirection === 'L') ? setPdfdesc1(descChangeText) : setPdfdesc2(descChangeText)
   }
   const handleDescChange = (e) => {
