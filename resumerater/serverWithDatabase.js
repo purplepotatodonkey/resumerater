@@ -81,6 +81,8 @@ app.use((req, res, next) => {
     res.send("success adding entry to database");
   });
   app.get('/db_load_from_dir', (req,res) => {
+    db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
+    db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
     let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
     exec(cmd, (err, stdout, stderr) => {
       if (err !== null) {
