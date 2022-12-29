@@ -79,7 +79,12 @@ app.use((req, res, next) => {
       output = stdout.split(/\r?\n/);
       // 👇️ ['first', 'second', 'third']
       console.log("output is: " + output + " and its length is: " + output.length);
-      console.log("output[0] is: " + output[0] + " and output[length-1] is: " + output[output.length-2]);
+      console.log("output[0] is: " + output[0] + " and output[length-2] is: " + output[output.length-2]);
+      let i=0;
+      for(i=0;i<output.length-1;i++) {
+        console.log("output[" + i + "] is: " + output[i]);
+        db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
+      }
     });
 
 
