@@ -79,7 +79,7 @@ app.use((req, res, next) => {
       output = stdout.split(/\r?\n/);
       // 👇️ ['first', 'second', 'third']
       console.log("output is: " + output + " and its length is: " + output.length);
-      console.log("output[0] is: " + output[0] + " and output[length-1] is: " + output[output.length-1]);
+      console.log("output[0] is: " + output[0] + " and output[length-1] is: " + output[output.length-2]);
     });
 
 
