@@ -160,8 +160,8 @@ function App() {
     })
     const data = await response.text();
     console.log(data)
-    (descChangeDirection === 'L') ? setPdfdesc1(descChangeText) : setPdfdesc2(descChangeText)
     setResAPI(data)
+    (descChangeDirection === 'L') ? setPdfdesc1(descChangeText) : setPdfdesc2(descChangeText)
   }
   const handleDescChange = (e) => {
     setDescChangeText(e.target.value)
