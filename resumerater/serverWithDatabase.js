@@ -76,6 +76,9 @@ app.use((req, res, next) => {
         console.log('exec error: ' + err);
       }
       console.log("output is: " + stdout)
+      output = stdout.split(/\r?\n/);
+      // 👇️ ['first', 'second', 'third']
+      console.log("output is: " + output + " and its length is: " + output.length);
     });
 
 
