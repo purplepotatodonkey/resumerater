@@ -127,8 +127,8 @@ app.get('/rate/:idw/:idl', (req,res) => {
   res.send(`incremented ${idw.substring(0,3)}... and decremented ${idl.substring(0,3)}...`);
 });
 app.post('/updatedesc/:id', (req,res) => {
-  let id = req.body.id;
-  let desc = req.body.desc;
+  const id = req.body.id;
+  const desc = req.body.desc;
   db.prepare('UPDATE RESUME_TABLE SET description = ? WHERE id = ?').run(desc,id);
   res.send(`updated description`);
 });
