@@ -182,7 +182,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>Test</div>
+      <div style={{marginTop:"30px"}}></div>
       <form action="http://139.177.207.245:5000/upload" method="post" encType="multipart/form-data">
         <input type="file" onChange={handleFileChange} name="pdf" accept="application/pdf"></input>
         <button type="submit">Upload PDF</button>
