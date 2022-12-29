@@ -124,7 +124,7 @@ app.get('/rate/:idw/:idl', (req,res) => {
   const idl = req.params.idl;
   db.prepare('UPDATE RESUME_TABLE SET rating=rating+1 WHERE id = ?').run(idw);
   db.prepare('UPDATE RESUME_TABLE SET rating=rating-1 WHERE id = ?').run(idl);
-  res.send(`incremented ${idw} and decremented ${idl}`);
+  res.send(`incremented ${idw.substring(0,3)}... and decremented ${idl.substring(0.3)}...`);
 });
 
 app.get('/random', (req,res) => {
