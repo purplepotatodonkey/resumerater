@@ -123,7 +123,6 @@ app.get('/random', (req,res) => {
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
     console.log('someone hitting upload route')
-    res.redirect('http://139.177.207.245:3000/');
     db.prepare('DROP TABLE IF EXISTS RESUME_TABLE').run();
     db.prepare('CREATE TABLE IF NOT EXISTS RESUME_TABLE (id TEXT PRIMARY KEY, rating INTEGER, description TEXT)').run();
     let cmd = "ls -1 /root/resumerater/resumerater/uploads/"
@@ -142,6 +141,7 @@ app.post('/upload', upload.single('pdf'), (req, res) => {
         db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(output[i], -1, "No description yet.");
       }
     });
+    res.redirect('http://139.177.207.245:3000/');
   });
 
 app.listen(port, () => {
