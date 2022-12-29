@@ -108,9 +108,20 @@ async function run() {
           if (err !== null) {
             console.log('exec error: ' + err);
           }
-          console.log("stdout is ... : " + stdout2)
-          db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
-          resolve();
+
+
+          // console.log("stdout is ... : " + stdout2)
+          // db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
+          // resolve();
+
+
+          setTimeout(() => {
+            console.log("stdout is ... : " + stdout2)
+            db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
+            resolve();
+          }, 1000);
+
+
         });
       });
       console.log("done execing incmd for i=" + i);
