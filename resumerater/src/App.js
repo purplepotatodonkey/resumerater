@@ -219,7 +219,7 @@ function App() {
           Page {pageNumber2} of {numPages2}
         </p>
       </div>}
-      {descriptionChangeOn && <div style={{fontSize:"50px",backgroundColor:"red", zIndex: 2, position: "absolute", top: "300px", left: "50%", padding:"30px", transform: "translate(-50%, -50%)", borderRadius:"10%", border:"5px solid blue", opacity:"0.7"}}><div style={{}}>Change Description? <button onClick={handleDescChangeClose} style={{}}>❌</button></div><textarea style={{}} value={descChangeText} onChange={handleDescChange} /><button onClick={handleDescChangeSubmit}>✅</button></div>}
+      {descriptionChangeOn && <div style={{fontSize:"50px",backgroundColor:"red", zIndex: 2, position: "absolute", top: "300px", left: "50%", padding:"30px", transform: "translate(-50%, -50%)", borderRadius:"10%", border:"5px solid gray", opacity:"0.9"}}><div style={{top:"0px",bottom:"50%",left:"0px",right:"50px"}}>Change Description?</div><button onClick={handleDescChangeClose} style={{top:"0px",bottom:"50%",left:"50px"}}>❌</button><textarea style={{}} value={descChangeText} onChange={handleDescChange} /><button onClick={handleDescChangeSubmit}>✅</button></div>}
       {pdfrating1 && <button className={"hoverbig"} style={{fontSize:"60px",backgroundColor:"red", zIndex: 1, position: "absolute", top: "500px", left: "40%", transform: "translate(-50%, -50%)"}} onClick={rateLeft}>💓</button>}
       {pdfrating2 && <button className={"hoverbig"} style={{fontSize:"60px",backgroundColor:"red", zIndex: 1, position: "absolute", top: "500px", right: "40%", transform: "translate(50%, -50%)"}} onClick={rateRight}>💓</button>}
     </div>
