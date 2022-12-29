@@ -169,8 +169,8 @@ function App() {
           Page {pageNumber2} of {numPages2}
         </p>
       </div>}
-      {pdfrating1 && <button className={"hoverbig"} style={{fontSize:"80px",backgroundColor:"green", zIndex: 1, position: "absolute", top: "500px", left: "40%",opacity:"0.3", transform: "translate(-50%, -50%)"}} onClick={rateLeft}>💓</button>}
-      {pdfrating2 && <button className={"hoverbig"} style={{fontSize:"80px",backgroundColor:"green", zIndex: 1, position: "absolute", top: "500px", right: "40%",opacity:"0.3", transform: "translate(50%, -50%)"}} onClick={rateRight}>💓</button>}
+      {pdfrating1 && <button className={"hoverbig"} style={{fontSize:"80px",backgroundColor:"green", zIndex: 1, position: "absolute", top: "500px", left: "40%",opacity:"0.1", transform: "translate(-50%, -50%)"}} onClick={rateLeft}>💓</button>}
+      {pdfrating2 && <button className={"hoverbig"} style={{fontSize:"80px",backgroundColor:"green", zIndex: 1, position: "absolute", top: "500px", right: "40%",opacity:"0.1", transform: "translate(50%, -50%)"}} onClick={rateRight}>💓</button>}
     </div>
   );
 }
