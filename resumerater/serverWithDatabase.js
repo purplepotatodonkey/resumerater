@@ -119,7 +119,7 @@ async function run() {
             console.log("stdout is ... : " + stdout2)
             db.prepare('INSERT INTO RESUME_TABLE (id, rating, description) VALUES (?,?,?)').run(stdout2, -1, "No description yet.");
             resolve();
-          }, 1000);
+          }, 3000);
 
 
         });
