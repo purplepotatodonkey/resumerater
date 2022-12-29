@@ -78,11 +78,11 @@ function App() {
     setResAPI(data)
     setTimeout(() => {
       console.log("geting new pdfs...")
-      getRandomPDF(e);
+      getRandomPDF();
     },500)
   }
 
-  const getRandomPDF = async(e) => {
+  const getRandomPDF = async() => {
       console.log("Fetching 2 random pdfs from server...")
       const response = await fetch('http://139.177.207.245:5000/random', {
         method: 'GET'
