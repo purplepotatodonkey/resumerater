@@ -108,8 +108,8 @@ app.get('/getrating/:id', (req,res) => {
   const id = req.params.id;
   console.log("Fetching rating from pdf with id " + id);
     const stmt = db.prepare('SELECT rating FROM RESUME_TABLE WHERE id = ?').get(id);
-    console.log(stmt.rating)
-    res.send(stmt.rating);
+    console.log(stmt.rating.toString())
+    res.send(stmt.rating.toString());
 });
 
 app.get('/getdesc/:id', (req,res) => {
