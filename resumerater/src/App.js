@@ -188,6 +188,7 @@ function App() {
         <button type="submit">Upload PDF</button>
       </form>
       <Link to={'/AdminApp'}><button>Go To Admin Page</button></Link>
+      <Link to={'/Leaderboard'}><button>Go To Leaderboard Page</button></Link>
       <br></br>
       <button onClick={getRandomPDF}>{rateButtonText}</button>
       <br></br>
